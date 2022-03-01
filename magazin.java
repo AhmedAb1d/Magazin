@@ -48,8 +48,8 @@ public class magazin
     public static void main(String[] args)
     {
         produit p1 = new produit(1021,"Lait","Delice",0.700f,2,"juin",2022);
-        produit p2 = new produit(2510,"Yaourt","Vitalait",0f);
-        produit p3 = new produit(3250,"Tomate","Sicam",1.200f);
+        ProduitFruit p2 = new ProduitFruit(1224, "Fruit", "Pastèque", 50 ,"Juin");
+        ProduitFruit p3 = new ProduitFruit(7896 ,"Fruit" ,"Mandarine", 25.6, "Décembre");
         caissier c1=new caissier(1,"ahmed","sfax",13,2);
         caissier c2=new caissier(2,"abid","sfax",22,3);
         vendeur v1=new vendeur(3,"ahmed","sfax",23,2.5f);
@@ -58,7 +58,10 @@ public class magazin
         responsable r1=new responsable(6,"gaith","bou3rada",10,1200);
         magazin m1=new magazin(1, "carrefour","Centre-ville",c1,c2,v2,r1);
         magazin m2=new magazin(2,"Monoprix","Menzah 6",v1,v2,v3,r1);
-        m1.calcule();
+        magazin m3=new magazin(4,"test",p1,p2,p3);
+        
+        System.out.println(m3.calculStock());
+        
     }
     public String toString()
     {
@@ -160,5 +163,24 @@ public class magazin
             System.out.println("Le magazin d'ID: "+m.id+" a plus de produit.");
         else
             System.out.println("Les deux magazins ont la meme quantite des produits.");
+    }
+
+    public float calculStock()
+    {
+        float stock=0f;
+        for (int i=0; this.ensProd[i]!=null;i++)
+        {
+            if (this.ensProd[i].determinerTypeProduit()=="Fruit")
+            {
+                ProduitFruit p=(ProduitFruit)this.ensProd[i];
+                stock+=p.quantite;
+            }
+            else if (this.ensProd[i].determinerTypeProduit()=="Legume")
+            {
+                ProduitLegume p=(ProduitLegume)this.ensProd[i];
+                stock+=p.quantite;
+            }
+        }
+        return stock;
     }
 }

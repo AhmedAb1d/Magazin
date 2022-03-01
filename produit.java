@@ -1,3 +1,4 @@
+
 class Date
 {
     int jour;
@@ -11,7 +12,13 @@ public class produit
     String libelle;
     String marque;
     Float prix; 
-    Date d= new Date();
+    Date d=new Date();
+    double quantite;
+    public produit(int id,String libelle)
+    {
+        this.id=id;
+        this.libelle=libelle;
+    }
     public produit(int id,String libelle,String marque,float prix,int jour,String mois,int annee)
     {
        this.id=id;
@@ -29,18 +36,18 @@ public class produit
        this.libelle=libelle;
        this.prix=prix;
     } 
-    //public produit(){}
+    public produit(){}
     public static void main (String[]args)
     {
-        produit p1 = new produit(1021,"Lait","Delice",0.700f,2,"juin",2022);
+        ProduitFruit p1 = new ProduitFruit(1254 ,"Fruit", "Fraise", 12.5, "Mars");
         
-        produit p2 = new produit(2510,"Yaourt","Vitalait",0f);
+        ProduitFruit p2 = new ProduitFruit(1224, "Fruit", "Pasteque", 50 ,"Juin");
 
-        produit p3 = new produit(3250,"Tomate","Sicam",1.200f);
+        ProduitFruit p3 = new ProduitFruit(7896 ,"Fruit" ,"Mandarine", 25.6, "Décembre");
 
-        System.out.println(p1.toString());
-        System.out.println(p2.toString());
-        System.out.println(p3.toString());
+        ProduitLegume p4 = new ProduitLegume(8521 ,"Légumes" ,"Artichauts", 14 ,"Janvier");
+
+        System.out.println(p4.determinerTypeProduit());
     }
     public String toString()
     {
@@ -57,5 +64,59 @@ public class produit
             return true;
         else
             return false;
+    }
+    public String determinerTypeProduit()
+    {
+        if (this instanceof ProduitFruit)
+        {
+            return "Fruit";
+        }
+        else if (this instanceof ProduitLegume)
+        {
+            return "Legume";
+        }
+        else
+        {
+            return "Autre";
+        }
+
+    }
+}
+
+class ProduitFruit extends produit
+{
+    String type;
+    double quantite;
+    String saison;
+    public ProduitFruit(){}
+    public ProduitFruit(int id,String type,String libelle,double quantite, String saison)
+    {
+        super(id, libelle);
+        this.type=type;
+        this.quantite=quantite;
+        this.saison=saison;
+    }
+    public boolean estFrais(String saison)
+    {
+        return this.saison==saison;
+    }
+}
+
+class ProduitLegume extends produit
+{
+    String type;
+    double quantite;
+    String saison;
+    public ProduitLegume(){}
+    public ProduitLegume(int id,String type,String libelle,double quantite, String saison)
+    {
+        super(id, libelle);
+        this.type=type;
+        this.quantite=quantite;
+        this.saison=saison;
+    }
+    public boolean estFrais(String saison)
+    {
+        return this.saison==saison;
     }
 }
